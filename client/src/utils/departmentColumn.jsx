@@ -44,7 +44,7 @@ export const DepartmentButtons = ({ _id }) => {
     return (
         <div className="flex space-x-3">
             <button
-                className="px-4 py-1 bg-teal-600 text-white rounded font-medium hover:bg-teal-700"
+                className="px-4 py-1 bg-blue-600 text-white rounded font-medium hover:bg-blue-700"
                 onClick={() => navigate(`/admin-dashboard/departments/${_id}`)}
             >
                 Edit

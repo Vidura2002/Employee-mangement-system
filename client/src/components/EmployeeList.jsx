@@ -56,16 +56,53 @@ const EmployeeList = () => {
       setFilterEmployees(filterData)
   }
 
+  const customStyles = {
+    tableWrapper: {
+      style: {
+        borderRadius: '10px', // Rounded corners for the table wrapper
+        overflow: 'hidden', // Ensures content respects the border radius
+      },
+    },
+    table: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for the table
+        borderRadius:'10px'
+      },
+    },
+    headRow: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for the header row
+        color: 'white', // White text for header
+      },
+    },
+    rows: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for rows
+        color: '#D1D5DB', // White text for rows
+      },
+      highlightOnHoverStyle: {
+        backgroundColor: 'gray', // Gray background on hover
+        color: 'white',
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for the pagination
+        color: 'white', // White text for pagination items
+      }
+    }
+  };
+
   return (
     <>{loading ? <div>Loading........</div> :
-    <div className='p-5'>
+    <div className='p-5 bg-gray-700 h-full'>
       <div className='text-center'>
-        <h3 className='text-2xl font-bold'>Manage Employee</h3>
+        <h3 className='text-2xl font-bold text-white'>Manage Employee</h3>
       </div> 
 
       <div className='flex justify-between items-center '>
-        <input type='text' placeholder='search by employee id' className='border px-4 py-0.5' onChange={filterEmployees}></input>
-        <Link to="/admin-dashboard/add-employee" className='bg-teal-600 px-4 py-1 text-white rounded-md'>Add new employee</Link>
+        <input type='text' placeholder='search by employee id' className='rounded-md px-4 py-1 bg-gray-800 text-white' onChange={filterEmployees}></input>
+        <Link to="/admin-dashboard/add-employee" className='bg-purple-700 px-4 py-1 text-white font-bold rounded-md'>Add new employee</Link>
       </div>
 
       <div className='mt-5'>
@@ -73,6 +110,7 @@ const EmployeeList = () => {
         pagination
         columns={emColumns}
         data={filterEm}
+        customStyles={customStyles}
         />
       </div>
 

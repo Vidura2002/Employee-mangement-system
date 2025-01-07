@@ -50,15 +50,52 @@ const Departments = () => {
     setFilterDept(filterDep)
   }
 
+  const customStyles = {
+    tableWrapper: {
+      style: {
+        borderRadius: '10px', // Rounded corners for the table wrapper
+        overflow: 'hidden', // Ensures content respects the border radius
+      },
+    },
+    table: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for the table
+        borderRadius:'10px'
+      },
+    },
+    headRow: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for the header row
+        color: 'white', // White text for header
+      },
+    },
+    rows: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for rows
+        color: '#D1D5DB', // White text for rows
+      },
+      highlightOnHoverStyle: {
+        backgroundColor: 'gray', // Gray background on hover
+        color: 'white',
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: '#1F2937', // Black background for the pagination
+        color: 'white', // White text for pagination items
+      }
+    }
+  };
+
   return (
     <>{loading ? <div>Loading.......... </div> :
-    <div className='p-5'>
+    <div className='p-5 bg-gray-700 h-full'>
       <div className='text-center'>
-        <h3 className='text-2xl font-bold'>Manage Departments</h3>
+        <h3 className='text-2xl font-bold text-white'>Manage Departments</h3>
       </div>
       <div className='flex justify-between items-center'>
-        <input type='text' placeholder='search by name' className='px-4 py-0.5 border' onChange={filterDepartment}></input>
-        <Link to="/admin-dashboard/add-department" className='px-4 py-1 bg-teal-600 text-white rounded'>Add new department</Link>
+        <input type='text' placeholder='search by name' className='px-4 py-1 bg-gray-800 rounded-md text-white' onChange={filterDepartment}></input>
+        <Link to="/admin-dashboard/add-department" className='px-4 py-1 bg-purple-700 font-bold hover:bg-purple-800 text-white rounded'>Add new department</Link>
       </div>
 
       <div className='mt-5'>
@@ -66,6 +103,7 @@ const Departments = () => {
         columns={columns}
         data={filterDept}
         pagination
+        customStyles={customStyles}
         />
       </div>
     </div>

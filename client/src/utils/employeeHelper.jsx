@@ -22,6 +22,26 @@ const fetchDept = async() =>{
     return departments;
 }
 
+const fetchAdmins = async() =>{
+    let admins;
+    try{
+        const response = await axios.get("http://localhost:3000/api/employee/getadmins",{
+            headers:{
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        if(response.data.success){
+            admins=response.data.admins
+        }
+        
+    }catch(error){
+        if(error && !error.response.data.error){
+            alert(error.response.data.error)
+        }
+    }
+    return admins;
+}
+
 export const emColumns =[
     {
         name:"S no",
@@ -89,7 +109,7 @@ const deleteEmployee = async(id,navigate) => {
             onClick={()=>navigate(`/admin-dashboard/employee/${_id}`)}
             >
                 View</button>
-            <button className="bg-yellow-600 text-white px-5 py-1 rounded-md font-medium hover:bg-yellow-700"
+            <button className="bg-blue-600 text-white px-5 py-1 rounded-md font-medium hover:bg-blue-700"
             onClick={()=>navigate(`/admin-dashboard/employee-edit/${_id}`)}
             >Edit</button>
             <button className="bg-red-500 text-white px-3 py-1 rounded-md font-medium hover:bg-red-600"
@@ -99,4 +119,4 @@ const deleteEmployee = async(id,navigate) => {
     )
 }
 
-export {fetchDept}
+export {fetchDept,fetchAdmins}

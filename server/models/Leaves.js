@@ -1,14 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 
 
-const leavesSchema = mongoose.Schema({
-    employee_id:{type:Schema.Types.ObjectId,required:true,ref:"Employee"},
+const leavesSchema =new mongoose.Schema({
+    user_id:{type:Schema.Types.ObjectId,required:true,ref:"User"},
     reason:{type:String,required:true},
-    approved:{type:Boolean,required:true},
+    decision:{type:String,enum:['approved',"rejected","pending"],required:true},
     approved_by:{type:Schema.Types.ObjectId,ref:"User"},
     requestedAt:{type:Date,default:Date.now,required:true},
-    leave_date:{type:Date,default:Date.now,required:true},
-    approvededAt:{type:Date,default:Date.now}
+    leave_date:{type:Date,required:true},
+    approvededAt:{type:Date}
 });
 
 const Leave = mongoose.model("Leave",leavesSchema);

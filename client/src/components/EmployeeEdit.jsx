@@ -68,61 +68,61 @@ const EmployeeEdit = () => {
     },[])
   return (
     <>{loading ? <div>Loading....</div> :
-    <div className='max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md '>
-      <h2 className='text-2xl font-bold mb-6'>Edit Employee Details</h2>
+    <div className='max-full bg-gray-700 p-8  shadow-md '>
+      <h2 className='text-2xl font-bold mb-6 text-white'>Edit Employee Details</h2>
       <form onSubmit={handleSubmit}>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="name">Name</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="name">Name</label>
                 <input type='text'
                 name="name"
                 value={name}
                 onChange={(event)=>setName(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="email">e-mail</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="email">e-mail</label>
                 <input type='email'
                 name="email"
                 value={email}
                 onChange={(event)=>setEmail(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="employee-id">Employee ID</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="employee-id">Employee ID</label>
                 <input type='text'
                 name="employee id"
                 value={em_id}
                 onChange={(event)=>setId(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="birth day">Date of birth</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="birth day">Date of birth</label>
                 <input type='date'
                 name="birth day"
                 value={dob}
                 onChange={(event)=>setDob(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="email">Gender</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="email">Gender</label>
                 <select
                 name="gender"
                 value={gender}
                 onChange={(event)=>setGender(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required>
                     <option value=''>Select gender</option>
                     <option value='male'>Male</option>
@@ -132,12 +132,12 @@ const EmployeeEdit = () => {
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="marital">Marital status</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="marital">Marital status</label>
                 <select
                 name="marital status"
                 value={gender}
                 onChange={(event)=>setMarital(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required>
                     <option value=''>Select status</option>
                     <option value='single'>Single</option>
@@ -146,23 +146,23 @@ const EmployeeEdit = () => {
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="designation">Designation</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="designation">Designation</label>
                 <input type='text'
                 name="designation"
                 onChange={(event)=>setDesignation(event.target.value)}
                 value={designation}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="dapartment">Department</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="dapartment">Department</label>
                 <select
                 name="department"
                 value={department}
                 onChange={(event)=>setDepartment(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required>
                     <option value=''>Select department</option>
                     {departments.map((dep)=>(
@@ -172,34 +172,34 @@ const EmployeeEdit = () => {
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="salary">Salary</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="salary">Salary</label>
                 <input type='number'
                 name="salary"
                 onChange={(event)=>setSalary(event.target.value)}
                 value={salary}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="password">Password</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="password">Password</label>
                 <input type='password'
                 name="password"
                 onChange={(event)=>setPassword(event.target.value)}
                 placeholder='************'
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required
                 ></input>
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="role">Role</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="role">Role</label>
                 <select
                 name="role"
                 value={role}
                 onChange={(event)=>setRole(event.target.value)}
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 required>
                     <option className=''>Select Role</option>
                     <option value="admin">Admin</option>
@@ -208,20 +208,20 @@ const EmployeeEdit = () => {
             </div>
 
             <div>
-                <label className='block text-sm font-medium text-gray-700' htmlFor="image">Upload Image</label>
+                <label className='block text-sm font-medium text-gray-400' htmlFor="image">Upload Image</label>
                 <input type='file'
                 name="image"
                 onChange={(event)=>setImage(event.target.value)}
                 placeholder='upload image'
                 accept='/image/*'
-                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+                className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 ></input>
             </div>
 
         </div>
 
         <button type='submit'
-        className='w-full bg-teal-600 text-white mt-6 hover:bg-teal-700 font-bold px-4 py-2 rounded-md'
+        className='w-full bg-purple-600 text-white mt-6 hover:bg-purple-700 font-bold px-4 py-2 rounded-md'
         >Edit Employee Detail</button>
       </form>
     </div>

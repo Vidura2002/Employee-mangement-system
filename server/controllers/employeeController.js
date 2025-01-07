@@ -60,6 +60,15 @@ const getEmployees = async(req,res) =>{
     }
 }
 
+const getAdmins = async(req,res) =>{
+    try{
+        const admins = await User.find({role:"admin"})
+        res.status(200).json({success:true,message:"Data fetch success",admins})
+    }catch(error){
+        res.status(500).json({success:false,error:"error fetching data"})
+    }
+}
+
 const getEmployeeDetail = async(req,res) =>{
     try{
         const {id} = req.params;
@@ -85,4 +94,4 @@ const deleteEmploye= async(req,res) =>{
     }
 }
 
-export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye}
+export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins}

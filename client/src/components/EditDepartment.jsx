@@ -56,30 +56,30 @@ const EditDepartment = () => {
     }
   return (
     <>{loading ? <div>loading</div> :
-    <div className='max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-96'>
-        <h3 className='text-2xl font-bold mb-6'>Edit Department</h3>
+    <div className='w-full bg-gray-700 p-8 shadow-md h-full'>
+        <h3 className='text-2xl font-bold mb-6 text-white'>Edit Department</h3>
         <form onSubmit={handleSubmit}> 
           <div>
-            <label htmlFor='dept_name' className='text-sm font-medium text-gray-700'>Department Name</label>
+            <label htmlFor='dept_name' className='text-sm font-medium text-gray-300'>Department Name</label>
             <input 
               type='text' 
               placeholder='Enter dept name' 
               value={dept_name}
               onChange={(event)=>{setDepartment(event.target.value)}}
-              className='mt-1 w-full p-2 border border-gray-300 rounded-md'>
+              className='mt-1 w-full p-2 border text-gray-400 bg-gray-800 rounded-md'>
             </input>
           </div>
-          <div>
-            <label htmlFor='description' className='text-sm font-medium text-gray-700'>Description</label>
+          <div className='mt-5'>
+            <label htmlFor='description' className='text-sm font-medium text-gray-300'>Description</label>
             <textarea 
               name='description' 
               placeholder='Description' 
               value={description}
               onChange={(event)=>{setDescription(event.target.value)}}
-              className='mt-1 w-full p-2 block border border-gray-300 rounded-md' rows="4">
+              className='mt-1 w-full p-2 block border text-gray-400 bg-gray-800 rounded-md' rows="4">
             </textarea>
           </div>
-          <button type='submit' className='w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-md'>Edit department</button>
+          <button type='submit' className='w-full mt-6 bg-purple-600 hover:bg-purple-700 font-bold text-white py-2 px-4 rounded-md'>Edit department</button>
         </form>
     </div>
     }</>

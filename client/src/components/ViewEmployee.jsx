@@ -55,58 +55,58 @@ const ViewEmployee = () => {
     },[])
   return (
     <>{loading ? <div>Loading....</div> :
-        <div>
-            <div className='max-w-4xl mx-auto bg-white mt-10  p-8 rounded-md shadow-md'>
-                <h3 className='text-2xl font-bold mb-5 text-center'>Employee Information</h3>
+        <div className='h-full'>
+            <div className='w-full bg-gray-700 h-full  p-8  shadow-md'>
+                <h3 className='text-2xl font-bold mb-5 text-center text-white'>Employee Information</h3>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
-                        <label htmlFor='name' className='font-medium'>Name : </label>
-                        <input type='text' value={name}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='name' className='font-medium text-gray-400'>Name : </label>
+                        <input type='text' value={name}  className='px-3 py-2 shadow-md bg-gray-800 text-gray-400 rounded-md w-full'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='email' className='font-medium'>e-mail : </label>
-                        <input type='text' value={email}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='email' className='font-medium text-gray-400'>e-mail : </label>
+                        <input type='text' value={email}  className='px-3 py-2 shadow-md  w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='role' className='font-medium'>Role : </label>
-                        <input type='text' value={role}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='role' className='font-medium text-gray-400'>Role : </label>
+                        <input type='text' value={role}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='em_id' className='font-medium'>Employee Id : </label>
-                        <input type='text' value={employee_id}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='em_id' className='font-medium text-gray-400'>Employee Id : </label>
+                        <input type='text' value={employee_id}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='dob' className='font-medium'>Date of Birth : </label>
-                        <input type='text' value={dob}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='dob' className='font-medium text-gray-400'>Date of Birth : </label>
+                        <input type='text' value={dob}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='gender' className='font-medium'>Gender : </label>
-                        <input type='text' value={gender}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='gender' className='font-medium text-gray-400'>Gender : </label>
+                        <input type='text' value={gender}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='marital' className='font-medium'>Marital status : </label>
-                        <input type='text' value={maritalStat}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='marital' className='font-medium text-gray-400'>Marital status : </label>
+                        <input type='text' value={maritalStat}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='designation' className='font-medium'>Designation : </label>
-                        <input type='text' value={designation}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='designation' className='font-medium text-gray-400'>Designation : </label>
+                        <input type='text' value={designation}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='department' className='font-medium'>Department : </label>
-                        <input type='text' value={department}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='department' className='font-medium text-gray-400'>Department : </label>
+                        <input type='text' value={department}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
 
                     <div>
-                        <label htmlFor='created' className='font-medium'>Created At : </label>
-                        <input type='text' value={created}  className='px-3 py-2 shadow-md text-neutral-500 w-full border'></input>
+                        <label htmlFor='created' className='font-medium text-gray-400'>Created At : </label>
+                        <input type='text' value={created}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
                 </div>
             </div>
