@@ -7,6 +7,7 @@ import departmentRouter from "./routes/departmentRouter.js"
 import employeeRouter from "./routes/employeeRouter.js"
 import counterRouter from "./routes/counterRouter.js"
 import userRouter from './routes/userRouter.js'
+import leavesRouter from "./routes/leavesRouter.js"
 
 connectDatabase();
 
@@ -21,6 +22,7 @@ app.use("/api/dashboard",counterRouter)
 app.use("/api/department",departmentRouter)
 app.use("/api/employee",employeeRouter)
 app.use("/api/user",userRouter)
+app.use("/api/leaves",leavesRouter)
 
 
 app.listen(process.env.PORT,()=>{

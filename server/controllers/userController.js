@@ -15,7 +15,7 @@ const request_leave = async(req,res) =>{
             reason,
             approved_by:to,
             decision:"pending",
-            leave_date:date
+            leave_date:date,
         });
         await newLeave.save();
         res.status(200).json({success:true,message:"Leave request successed."})
@@ -28,7 +28,7 @@ const getLeaves = async(req,res) =>{
     try{
         const  admin_id  = req.params;
         const ObjectId = new mongoose.Types.ObjectId(admin_id);
-        const leaves = await Leave.find({approved_by:ObjectId}).populate("user_id",{password:0});
+        const leaves = await Leave.find({approved_by:ObjectId,decision:"pending"}).populate("user_id",{password:0});
         res.status(200).json({success:true,message:"Leave fetch success.",leaves})
     }catch(error){
         res.status(500).json({success:false,error:"Fetching leaves error"})

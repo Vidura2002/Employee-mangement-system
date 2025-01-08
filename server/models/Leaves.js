@@ -8,7 +8,6 @@ const leavesSchema =new mongoose.Schema({
     approved_by:{type:Schema.Types.ObjectId,ref:"User"},
     requestedAt:{type:Date,default:Date.now,required:true},
     leave_date:{type:Date,required:true},
-    approvededAt:{type:Date}
 });
 
 const Leave = mongoose.model("Leave",leavesSchema);
