@@ -2,6 +2,7 @@ import Employee from "../models/Employee.js"
 import bcrypt from 'bcrypt'
 import User from "../models/User.js"
 import multer from "multer"
+import { senEmail } from "../utils/emailServer.js"
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
@@ -43,7 +44,18 @@ const employeeAdd = async(req,res) =>{
         })
 
         await newEmployee.save()
-        res.status(200).json({success:true,message:"Employee added success.",newEmployee})
+        
+        const subject = "Inform about company registration"
+        const text = `Hello ${name} \n\n Welcome to the company! We're excited to have you join us as a ${designation} in ${department} department 
+        \n use your email as user name and password is mention below for the employee management system \n\n
+        employee-id : ${id} \n password : ${password} \n salary : ${salary} \n\n We look forward to seeing you thrive and contribute to our shared goals. Together, we’re confident that we will achieve great things!
+        \n\n Once again, welcome aboard, and we can’t wait to see you on your first day. \n\n Best regard Nishan Jayaroy \n CEO \n nishanjayaroy.co.info.com`;
+        
+        const sendemail = await senEmail(email,subject,text);
+        if(senEmail){
+            res.status(200).json({success:true,message:"Employee added success.",newEmployee})
+        }
+        
     }catch(error){
         console.log(error)
         res.status(500).json({success:false,error:"Faild employee add"})

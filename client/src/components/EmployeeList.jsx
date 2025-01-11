@@ -23,7 +23,6 @@ const EmployeeList = () => {
           }
         )
         if(response.data.success){
-          console.log(response.data.employees)
           let sno =1
           const data = await response.data.employees.map((em)=>(
             {
@@ -41,8 +40,7 @@ const EmployeeList = () => {
         }
       }catch(error){
         if(error && !error.response.data.error){
-          console.log(error)
-          alert(error.response.data.error)
+          console.log(error.response.data.error);
         }
       }finally{
         setLoading(false)
