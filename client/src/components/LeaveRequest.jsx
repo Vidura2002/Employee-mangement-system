@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchAdmins } from '../utils/employeeHelper';
 import axios from 'axios';
 import { useAuth } from '../context/authContext';
-import {Errormessage, Successmessage } from '../utils/message';
+import {Errormessage, Successmessage, SuccessSnak } from '../utils/message';
 import { use } from 'react';
 
 
@@ -11,6 +11,7 @@ const LeaveRequest = () => {
     const [reason,setReason] = useState("");
     const [date,setDate] = useState("");
     const [receiver,setReceiver] = useState("");
+    const [type,setType] = useState("");
     const {user} = useAuth();
 
     const [successmessage,setsuccessMsg] = useState("")
@@ -29,7 +30,7 @@ const LeaveRequest = () => {
         console.log(reason,date,receiver,user)
         try{
             const response = await axios.post("http://localhost:3000/api/user/reqLeave",
-                {reason,date,receiver,from:user._id},
+                {reason,date,type,receiver,from:user._id},
                 {
                     headers:{
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -55,13 +56,25 @@ const LeaveRequest = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-        <div className='flex flex-col items-center justify-center mt-5 '>
+        <div className='flex flex-col items-center justify-center mt-2 '>
                 <div className='flex flex-col gap-2 mt-4 text-white'>
                     <label htmlFor='reason'>Enter your leave reason</label>
                     <textarea className='border border-white-300 bg-gray-700 rounded-md px-2 py-1 w-96 h-40' type='text' placeholder='mention your reason' 
                     value={reason}
                     onChange={(event)=>{setReason(event.target.value)}}
                     ></textarea>
+                </div>
+
+                <div className='flex flex-col gap-2 mt-5 text-white'>
+                    <label htmlFor='to'>Select leave type</label>
+                    <select className='border border-white-300 bg-gray-700 rounded-md px-2 py-1 w-96 ' type='date'
+                    onChange={(event)=>{setType(event.target.value)}}
+                    value={type}
+                    >
+                        <option value="">Select leave type</option>
+                        <option value="Full Day">Full Day</option>
+                        <option value="Half Day">Half Day</option>
+                    </select>
                 </div>
 
                 <div className='flex flex-col gap-2 mt-5 text-white'>

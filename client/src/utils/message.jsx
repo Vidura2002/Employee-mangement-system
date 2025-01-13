@@ -1,19 +1,44 @@
 import { FaInfoCircle,FaCheckCircle } from "react-icons/fa"
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { useState } from "react";
 
-export const Successmessage = ({message}) =>{
+export const Errormessage = ({message}) =>{
+
+    const [open,setOpen] = useState(true)
+    const handleClose = () =>{
+       setOpen(false)
+    }
     return(
-        <div className={`flex flex-row gap-4 bg-green-200 items-center justify-center py-2 rounded border-2 w-96 absolute bottom-5 right-3 border-green-700 px-3`} >
-            <FaCheckCircle />
-            <div className="font-bold">{message}</div>
-        </div>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+                onClose={handleClose}
+                severity="error"
+                variant="filled"
+                sx={{ width: '100%' }}
+            >
+            {message}
+            </Alert>
+        </Snackbar>
     )
 }
 
-export const Errormessage = ({message}) =>{
+export const SucceMessage = ({message}) => {
+
+    const [open,setOpen] = useState(true)
+    const handleClose = () =>{
+       setOpen(false)
+    }
     return(
-        <div className={`flex flex-row gap-4 bg-red-200 items-center justify-center py-2 rounded border-2 w-96 absolute bottom-5 right-3 border-red-700 px-3 `} >
-            <FaInfoCircle/>
-            <div className="font-bold">{message}</div>
-        </div>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+                onClose={handleClose}
+                severity="success"
+                variant="filled"
+                sx={{ width: '100%' }}
+            >
+            {message}
+            </Alert>
+        </Snackbar>
     )
 }

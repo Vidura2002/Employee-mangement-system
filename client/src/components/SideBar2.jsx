@@ -19,7 +19,7 @@ const SideBar2 = () => {
             <span>Leave Request</span>
         </NavLink>
 
-        <NavLink to="/" className={({isActive}) => `${isActive ? "bg-purple-500" : " "} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
+        <NavLink to="/employee-dashboard/leavehistory" className={({isActive}) => `${isActive ? "bg-purple-500" : " "} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
             <FaCommentDots/>
             <span>Leave History</span>
         </NavLink>

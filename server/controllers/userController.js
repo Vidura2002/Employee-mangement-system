@@ -9,10 +9,12 @@ const request_leave = async(req,res) =>{
         const date = req.body.date;
         const to = req.body.receiver;
         const from = req.body.from;
+        const type = req.body.type
         
         const newLeave = new Leave({
             user_id:from,
             reason,
+            type,
             approved_by:to,
             decision:"pending",
             leave_date:date,

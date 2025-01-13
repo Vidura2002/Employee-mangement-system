@@ -13,6 +13,7 @@ import EmployeeEdit from "./components/EmployeeEdit";
 import LeaveList from "./components/LeaveList";
 import LeaveRequest from "./components/LeaveRequest";
 import Profile from "./components/Profile";
+import LeaveHistory from "./components/LeaveHistory";
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
           <Route path="/employee-dashboard" element={<EmplooyeDashboard/>}>
             <Route index element={<Profile/>}></Route>
             <Route path="/employee-dashboard/leaverequest" element={<LeaveRequest/>}></Route>
-          
+            <Route path="/employee-dashboard/leavehistory" element={<LeaveHistory/>}></Route>
           </Route>
       </Routes>
     </BrowserRouter>
