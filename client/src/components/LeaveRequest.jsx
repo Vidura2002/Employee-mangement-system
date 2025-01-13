@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchAdmins } from '../utils/employeeHelper';
 import axios from 'axios';
 import { useAuth } from '../context/authContext';
-import {Errormessage, Successmessage, SuccessSnak } from '../utils/message';
+import {Errormessage, Successmessage } from '../utils/message';
 import { use } from 'react';
 
 

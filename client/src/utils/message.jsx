@@ -23,7 +23,7 @@ export const Errormessage = ({message}) =>{
     )
 }
 
-export const SucceMessage = ({message}) => {
+export const Successmessage = ({message}) => {
 
     const [open,setOpen] = useState(true)
     const handleClose = () =>{
