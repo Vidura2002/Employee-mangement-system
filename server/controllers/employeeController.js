@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import User from "../models/User.js"
 import multer from "multer"
 import { senEmail } from "../utils/emailServer.js"
+import mongoose from "mongoose";
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
@@ -83,9 +84,12 @@ const getAdmins = async(req,res) =>{
 
 const getEmployeeDetail = async(req,res) =>{
     try{
-        const {id} = req.params;
+        console.log("Awaooooooooo")
+        const id = new mongoose.Types.ObjectId(req.params)
+        console.log(id)
         const employee = await Employee.findById(id).populate('userId',{password:0}).populate('department')
         res.status(200).json({success:true,message:"Fetch employee success",employee})
+        console.log(employee)
     }catch(error){
         res.status(500).json({success:false,error:"Fetch data failed"})
     }

@@ -39,14 +39,22 @@ const getLeaves = async(req,res) =>{
 
 const myLeaves = async(req,res) =>{
     try{
-        console.log("my leaves")
         const user_id = new mongoose.Types.ObjectId(req.params);
         const leaves = await Leave.find({user_id:user_id});
         res.status(200).json({success:true,message:"Leaves get success.",leaves})
-        console.log("finish",leaves);
     }catch(error){
         res.status(500).json({success:false,error:"Leave fetched error"})
     }
 }
 
-export {request_leave,getLeaves,myLeaves}
+const cancelLeaves = async(req,res) =>{
+    try{
+        const id = new mongoose.Types.ObjectId(req.params);
+        const deletion = await Leave.findByIdAndDelete(id);
+        res.status(200).json({success:true,message:"leave deleted successfully"})
+    }catch(error){
+        res.status(500).json({success:false,error:"leave deletion failed"})
+    }
+}
+
+export {request_leave,getLeaves,myLeaves,cancelLeaves}

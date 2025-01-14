@@ -39,7 +39,7 @@ const LeaveHistory = () => {
     <>{loading ? <div>Loading</div> : 
         <div className='bg-gray-700 h-full pt-5'>
             {leaves.map((item,index)=>(
-                <Leave reason={item.reason} type={item.type} decision={item.decision} leave_date={new Date(item.leave_date).toDateString()} req_date={ new Date(item.requestedAt).toDateString()}/>
+                <Leave reason={item.reason} type={item.type} decision={item.decision} leave_date={new Date(item.leave_date).toDateString()} req_date={ new Date(item.requestedAt).toDateString()} id={item._id}/>
             ))}
         </div>
     }
