@@ -110,4 +110,15 @@ const deleteEmploye= async(req,res) =>{
     }
 }
 
-export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins}
+const getEmployeeId = async(req,res)=>{
+    try{
+        const user_id = new mongoose.Types.ObjectId(req.params)
+        const em = await Employee.findOne({userId:user_id})
+        const id = em._id
+        res.status(200).json({success:true,message:"Em id getting success",id})
+    }catch(error){
+        res.status(500).json({success:false,error:"failed getting employee id"})
+    }
+}
+
+export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins,getEmployeeId}

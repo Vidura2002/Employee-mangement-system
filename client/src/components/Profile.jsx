@@ -30,10 +30,29 @@ const Profile = () => {
 
     useEffect(()=>{
         setLoading(true)
+        const getEmId = async() =>{
+          try{
+            const response = await axios.get(`http://localhost:3000/api/employee/getEmId/${user._id}`,
+              {
+                headers:{
+                  "Authorization":`Bearer ${localStorage.getItem("token")}`
+                }
+              }
+            )
+            if(response.data.success){
+              setId(response.data.id)
+            }
+          }catch(error){
+            if(error && !error.response.data.error){
+              console.log("Error :",error.response.data.error)
+            }
+          }
+        }
+
         const fetchData = async() =>{
             try{
                 fetcDepartments();
-                const response = await axios.get(`http://localhost:3000/api/employee/${user._id}`,
+                const response = await axios.get(`http://localhost:3000/api/employee/${em_id}`,
                     {
                         headers:{
                             "Authorization" : `Bearer ${localStorage.getItem("token")}`
@@ -57,8 +76,6 @@ const Profile = () => {
                 if(error && !error.response.data.error){
                     alert(error.response.data.error)
                 }
-            }finally{
-                setLoading(false)
             }
         }
 
@@ -66,7 +83,9 @@ const Profile = () => {
             const getDeparments= await fetchDept()
             setDepartments(getDeparments)
         }
+        getEmId()
         fetchData()
+        setLoading(false)
     },[])
   return (
     <>{loading ? <div>Loading....</div> :
