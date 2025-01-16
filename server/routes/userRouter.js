@@ -8,5 +8,6 @@ router.get("/:id",authMiddleware,getLeaves)
 router.post("/reqLeave",authMiddleware,request_leave)
 router.get("/getLeaves/:id",authMiddleware,myLeaves)
 router.delete("/cancelLeave/:id",authMiddleware,cancelLeaves)
+router.get("/getEmployee",authMiddleware)
 
 export default router
