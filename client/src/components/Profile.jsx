@@ -4,12 +4,16 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { fetchDept } from '../utils/employeeHelper'
 import { useAuth } from '../context/authContext'
+import { Errormessage, Successmessage } from '../utils/message'
+import logo from '../assets/images/profile.jpg'
 
 const Profile = () => {
 
     const {user} = useAuth();
     let employee_id;
     const [loading,setLoading] = useState(false)
+    const [successMessage ,setSuccess] = useState("")
+    const [errorMessage,setError] = useState("")
 
     const [departments,setDepartments]=useState([])
     const [name,setName]=useState("")
@@ -20,8 +24,25 @@ const Profile = () => {
     const [salary,setSalary]=useState("")
     const [image,setImage]=useState("")
 
-    const handleSubmit = () =>{
-
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+        try{
+          const response = await axios.put("http://localhost:3000/api/user/updateprofile",
+            {employee_id,id:user._id,name,email,marital,designation,salary},
+            {
+              headers:{
+                "Authorization":`Bearer ${localStorage.getItem("token")}`
+              }
+            }
+          )
+          if(response.data.success){
+            setSuccess(response.data.message)
+          }
+        }catch(error){
+          if(error && !error.response.data.error){
+            setError(error.response.data.error)
+          }
+        }
     }
 
     useEffect(()=>{
@@ -85,8 +106,31 @@ const Profile = () => {
     },[])
   return (
     <>{loading ? <div>Loading....</div> :
-    <div className='max-full bg-gray-700 p-8  shadow-md h-full '>
+    <div className='max-full bg-gray-700 p-8  shadow-md h-full font-sans '>
       <h2 className='text-2xl font-bold mb-6 text-white'>Edit Employee Details</h2>
+
+      <div className='grid grid-cols-1 md:grid-cols-2 mb-5'>
+        <div className='flex flex-row items-center gap-8 text-gray-300 font-bold shadow-lg px-4 py-1 italic rounded-md'>
+          <img src={logo} alt='profile'className='size-48 rounded-full shadow-md'/>
+          <div>
+            <p>Department : IT</p>
+            <p>Gender : Male</p>
+            <p>Birthday : 2002/09/27</p>
+          </div>
+        </div>
+       
+        <div className='flex flex-row'>
+          <div className='bg-gray-700 w-64 ml-16 mt-2 rounded-md shadow-md shadow-gray-300 py-4 flex flex-col items-center justify-center text-gray-300 font-bold'>
+            <p className='text-xl'>Total Leaves</p>
+            <p className='text-2xl'>8</p>
+          </div>
+          <div className='bg-gray-700  mt-2 rounded-md shadow-md shadow-gray-300 w-64 py-4 ml-16 flex flex-col items-center justify-center text-gray-300 font-bold'>
+              <p className='text-xl'>Total Projects</p>
+              <p className='text-2xl '>13</p>
+          </div>
+        </div>
+      </div>
+      
       <form onSubmit={handleSubmit}>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div>
@@ -95,15 +139,12 @@ const Profile = () => {
                 name="name"
                 value={name}
                 onChange={(event)=>setName(event.target.value)}
-                className='mt-1 p-2 block w-full border-b border-l border-purple-400 bg-gray-700 text-white rounded-md'
+                className='mt-1 p-2 block w-full shadow-md shadow-gray-300 bg-gray-700 text-white rounded-md'
                 required
                 ></input>
             </div>
 
-            <div className='bg-gray-700 w-64 ml-16 mt-2 rounded-md shadow-md shadow-purple-400 py-4 flex flex-col items-center justify-center text-gray-300 font-bold'>
-                <p className='text-2xl'>Total Leaves</p>
-                <p className='text-3xl'>8</p>
-            </div>
+            
 
             <div>
                 <label className='block text-sm font-medium text-gray-400' htmlFor="email">e-mail</label>
@@ -111,15 +152,12 @@ const Profile = () => {
                 name="email"
                 value={email}
                 onChange={(event)=>setEmail(event.target.value)}
-                className='mt-1 p-2 block w-full border-b border-l border-purple-400 bg-gray-700 text-white rounded-md'
+                className='mt-1 p-2 block w-full shadow-md shadow-gray-300 bg-gray-700 text-white rounded-md'
                 required
                 ></input>
             </div>
 
-            <div className='bg-gray-700 font-sans mt-2 rounded-md shadow-md shadow-purple-400 w-64 py-4 ml-16 flex flex-col items-center justify-center text-gray-300 font-bold'>
-                <p className='text-2xl'>Total Projects</p>
-                <p className='text-3xl '>13</p>
-            </div>
+           
 
             <div>
                 <label className='block text-sm font-medium text-gray-400' htmlFor="marital">Marital status</label>
@@ -127,7 +165,7 @@ const Profile = () => {
                 name="marital status"
                 value={marital}
                 onChange={(event)=>setMarital(event.target.value)}
-                className='mt-1 p-2 block w-full border-b border-l border-purple-400 bg-gray-700 text-white rounded-md'
+                className='mt-1 p-2 block w-full shadow-md shadow-gray-300 bg-gray-700 text-white rounded-md'
                 required>
                     <option value=''>Select status</option>
                     <option value='single'>Single</option>
@@ -141,7 +179,7 @@ const Profile = () => {
                 name="designation"
                 onChange={(event)=>setDesignation(event.target.value)}
                 value={designation}
-                className='mt-1 p-2 block w-full border-b border-l border-purple-400 bg-gray-700 text-white rounded-md'
+                className='mt-1 p-2 block w-full shadow-md shadow-gray-300 bg-gray-700 text-white rounded-md'
                 required
                 ></input>
             </div>
@@ -153,7 +191,7 @@ const Profile = () => {
                 name="salary"
                 onChange={(event)=>setSalary(event.target.value)}
                 value={salary}
-                className='mt-1 p-2 block w-full border-b border-l border-purple-400 bg-gray-700 text-white rounded-md'
+                className='mt-1 p-2 block w-full shadow-md shadow-gray-300 bg-gray-700 text-white rounded-md'
                 required
                 ></input>
             </div>
@@ -165,17 +203,21 @@ const Profile = () => {
                 onChange={(event)=>setImage(event.target.value)}
                 placeholder='upload image'
                 accept='/image/*'
-                className='mt-1 p-2 block w-full border-b border-l border-purple-400 bg-gray-700 text-white rounded-md'
+                className='mt-1 p-2 block w-full shadow-md shadow-gray-300 bg-gray-700 text-white rounded-md'
                 ></input>
             </div>
 
         </div>
 
         <button type='submit'
-        className='w-40 bg-white  text-black text-white mt-6 hover:bg-gray-300 font-bold px-4 py-2 rounded-md'
+        className='w-40 bg-gray-800  text-black text-white mt-6 hover:bg-black font-bold px-4 py-2 rounded-md'
         >Save</button>
       </form>
+
+      {successMessage && <Successmessage message={successMessage}/>}
+      {errorMessage && <Errormessage message={errorMessage}/>}
     </div>
+
 }</>
   )
 }

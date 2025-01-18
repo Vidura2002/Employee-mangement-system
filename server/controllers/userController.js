@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Employee from "../models/Employee.js";
 import Leave from "../models/Leaves.js";
+import User from "../models/User.js";
 
 
 const request_leave = async(req,res) =>{
@@ -57,6 +58,40 @@ const cancelLeaves = async(req,res) =>{
     }
 }
 
+const updateProfile = async(req,res) =>{
+    try{
+        const em_id = req.body.employee_id;
+        const user_id = req.body.id;
+        const email = req.body.email;
+        const salary = req.body.salary;
+        const designation = req.body.designation;
+        const marital = req.body.marital;
+        const name = req.body.name;
+
+       const employee = await Employee.findOne({userId:user_id});
+
+        const update_user = await User.updateOne({_id:user_id},{
+            $set:{
+                name:name,
+                email:email
+            }
+        }
+        );
+
+        const update_employee = await Employee.updateOne({_id:employee._id},{
+            $set:{
+                marital_status:marital,
+                salary:salary,
+                designation:designation,
+            }
+        });
+
+        res.status(200).json({success:true,message:"Profile updated successfull"})
+    }catch(error){
+        res.status(500).json({success:false,error:"Profile update failed!"})
+    }
+}
 
 
-export {request_leave,getLeaves,myLeaves,cancelLeaves}
+
+export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile}
