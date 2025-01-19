@@ -29,9 +29,9 @@ const SideBar = () => {
             <span>Leave Requests</span>
         </NavLink>
 
-        <NavLink to="/admin-dashboard" className="flex items-center space-x-4 block py-2.5 px-4 rounded">
+        <NavLink to="/admin-dashboard/project" className="flex items-center space-x-4 block py-2.5 px-4 rounded">
             <FaMoneyBillWave/>
-            <span>Salary</span>
+            <span>Projects</span>
         </NavLink>
 
         <NavLink to="/admin-dashboard" className="flex items-center space-x-4 block py-2.5 px-4 rounded">

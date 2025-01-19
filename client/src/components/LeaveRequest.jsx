@@ -59,7 +59,7 @@ const LeaveRequest = () => {
         <div className='flex flex-col items-center justify-center mt-2 '>
                 <div className='flex flex-col gap-2 mt-4 text-white'>
                     <label htmlFor='reason'>Enter your leave reason</label>
-                    <textarea className='shadow-md bg-gray-700 rounded-md px-2 py-1 w-96 h-40' type='text' placeholder='mention your reason' 
+                    <textarea className='shadow-md  bg-gray-700 rounded-md px-2 py-1 w-96 h-40' type='text' placeholder='mention your reason' 
                     value={reason}
                     onChange={(event)=>{setReason(event.target.value)}}
                     ></textarea>

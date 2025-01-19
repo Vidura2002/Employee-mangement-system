@@ -22,6 +22,8 @@ const Profile = () => {
     const [designation,setDesignation]=useState("")
     const [department,setDepartment]=useState("")
     const [salary,setSalary]=useState("")
+    const [gender,setGender] = useState("")
+    const [birthday,setBirthday] = useState("")
     const [image,setImage]=useState("")
 
     const handleSubmit = async(e) =>{
@@ -65,7 +67,8 @@ const Profile = () => {
                     setDesignation(response.data.employee.designation)
                     setDepartment(response.data.employee.department.dept_name)
                     setSalary(response.data.employee.salary)
-                
+                    setGender(response.data.employee.gender)
+                    setBirthday(new Date(response.data.employee.date_of_birth).toDateString())
                 }
             }catch(error){
                 if(error && !error.response.data.error){
@@ -113,9 +116,9 @@ const Profile = () => {
         <div className='flex flex-row items-center gap-8 text-gray-300 font-bold shadow-lg px-4 py-1 italic rounded-md'>
           <img src={logo} alt='profile'className='size-48 rounded-full shadow-md'/>
           <div>
-            <p>Department : IT</p>
-            <p>Gender : Male</p>
-            <p>Birthday : 2002/09/27</p>
+            <p>Department : {department}</p>
+            <p>Gender : {gender}</p>
+            <p>Birthday : {birthday}</p>
           </div>
         </div>
        
