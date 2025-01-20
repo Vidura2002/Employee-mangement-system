@@ -4,6 +4,7 @@ import User from "../models/User.js"
 import multer from "multer"
 import { senEmail } from "../utils/emailServer.js"
 import mongoose from "mongoose";
+import Department from "../models/Department.js"
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
@@ -121,4 +122,15 @@ const getEmployeeId = async(req,res)=>{
     }
 }
 
-export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins,getEmployeeId}
+const getprojectemployee = async(req,res)=>{
+    try{
+        console.log("awa pancho")
+        const dept = new mongoose.Types.ObjectId(req.body.dept);
+        const employees = await Employee.find({department:dept}).populate("userId" ,{password: 0})
+        res.status(200).json({success:true,message:"success",employees})
+    }catch(error){
+        res.status(500).json({success:false,error:"error getting employees"})
+    }
+}
+
+export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins,getEmployeeId,getprojectemployee}

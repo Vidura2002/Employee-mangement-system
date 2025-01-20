@@ -42,6 +42,28 @@ const fetchAdmins = async() =>{
     return admins;
 }
 
+const fetchEmployee = async(dept) =>{
+    let employee
+    try{
+        const response = await axios.post("http://localhost:3000/api/employee/getprojectemployee",
+            {dept},
+            {
+                headers:{
+                    "Authorization":`Bearer ${localStorage.getItem("token")}`
+                }
+            }
+        )
+        if(response.data.success){
+            employee=response.data.employees
+        }
+    }catch(error){
+        if(error && !error.response.data.error){
+            console.log(error.response.data.error)
+        }
+    }
+    return employee;
+}
+
 export const emColumns =[
     {
         name:"S no",
@@ -119,4 +141,4 @@ const deleteEmployee = async(id,navigate) => {
     )
 }
 
-export {fetchDept,fetchAdmins}
+export {fetchDept,fetchAdmins,fetchEmployee}
