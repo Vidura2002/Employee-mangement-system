@@ -1,6 +1,8 @@
 import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { fetchDept, fetchEmployee } from '../utils/employeeHelper'
+import axios from 'axios'
+import { Errormessage, Successmessage } from '../utils/message'
 
 const CreateProject = () => {
 
@@ -10,8 +12,12 @@ const CreateProject = () => {
     const [leader,setLeader] = useState("")
     const [description,setDescription] = useState("")
     const [contributors,setContributors] = useState([])
+    const [names,setNames] = useState([])
     const [departments,setDepartments] = useState([])
     const [employees,setEmployess] = useState([])
+
+    const [successMessage,setSuccess] = useState("")
+    const [errorMessage,setError] = useState("")
 
     useEffect(()=>{
         const gettingDept = async() =>{
@@ -27,17 +33,35 @@ const CreateProject = () => {
         setEmployess(getEmployees)
     }
 
-    const handleSelect =(option)=>{
+    const handleSelect =(option,name)=>{
         if(contributors.includes(option)){
             setContributors(contributors.filter((item)=> item !== option))
+            setNames(names.filter((item)=>item !== name))
         }
         else{
             setContributors([...contributors,option])
+            setNames([...names,name])
         }
     }
 
-    const hari = ()=>{
-        console.log(contributors)
+    const hari = async()=>{
+        try{
+            const response = await axios.post("http://localhost:3000/api/employee/addproject",
+                {title,department,startDate,leader,description,contributors},
+                {
+                    headers:{
+                        "Authorization":`Bearer ${localStorage.getItem("token")}`
+                    }
+                }
+            )
+            if(response.data.success){
+                setSuccess(response.data.message)
+            }
+        }catch(error){
+            if(error && !error.response.data.error){
+                setError(error.response.data.error)
+            }
+        }
     }
 
   return (
@@ -89,27 +113,33 @@ const CreateProject = () => {
                 <label htmlFor='title' className='text-gray-300 font-medium'>project contributors</label>
                 <select className='py-2 px-2 shadow-md rounded-md bg-gray-800 text-gray-300' 
                 onChange={(event) => {
-                    const options = event.target.options;
-                    for (const option of options) {
-                        if (option.selected) {
-                            handleSelect(option.value)
-                        }
-                    }
+                    const selectedEmployee = employees.find(em=> em._id === event.target.value);
+                    handleSelect(event.target.value,selectedEmployee?.userId.name)
                 }}
                 onClick={()=>gettingEmployees(department)} >
                     <option>first select department</option>
                     {employees && employees.map((item,index)=>(
-                        <option key={index} value={item._id}>{item.userId.name}</option>
+                        <option key={index} value={item._id} >{item.userId.name}</option>
                     ))}
                 </select>
             </div>
         </div>
 
-        <div className='mt-5'>
+        <div className='mt-4'>
+            {names.map((item,index)=>(
+                <span key={index} className='mx-2 text-xs text-gray-200 bg-black rounded  px-2 py-2'>+ {item}</span>
+            ))}
+        </div>
+        
+
+        <div className='mt-8'>
             <Button variant="contained" onClick={hari}>+ Create Project</Button>
         </div>
         
       </form>
+
+      {successMessage && <Successmessage message={successMessage}/>}
+      {errorMessage && <Errormessage message={errorMessage}/>}
     </div>
   )
 }
