@@ -44,7 +44,7 @@ const CreateProject = () => {
         }
     }
 
-    const hari = async()=>{
+    const create = async()=>{
         try{
             const response = await axios.post("http://localhost:3000/api/employee/addproject",
                 {title,department,startDate,leader,description,contributors},
@@ -133,7 +133,7 @@ const CreateProject = () => {
         
 
         <div className='mt-8'>
-            <Button variant="contained" onClick={hari}>+ Create Project</Button>
+            <Button variant="contained" onClick={create}>+ Create Project</Button>
         </div>
         
       </form>

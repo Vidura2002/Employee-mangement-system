@@ -5,6 +5,7 @@ import multer from "multer"
 import { senEmail } from "../utils/emailServer.js"
 import mongoose from "mongoose";
 import Department from "../models/Department.js"
+import Project from "../models/Project.js"
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
@@ -85,7 +86,6 @@ const getAdmins = async(req,res) =>{
 
 const getEmployeeDetail = async(req,res) =>{
     try{
-        console.log("Awaooooooooo")
         const id = new mongoose.Types.ObjectId(req.params)
         console.log(id)
         const employee = await Employee.findById(id).populate('userId',{password:0}).populate('department')
@@ -124,7 +124,6 @@ const getEmployeeId = async(req,res)=>{
 
 const getprojectemployee = async(req,res)=>{
     try{
-        console.log("awa pancho")
         const dept = new mongoose.Types.ObjectId(req.body.dept);
         const employees = await Employee.find({department:dept}).populate("userId" ,{password: 0})
         res.status(200).json({success:true,message:"success",employees})
@@ -133,4 +132,53 @@ const getprojectemployee = async(req,res)=>{
     }
 }
 
-export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins,getEmployeeId,getprojectemployee}
+const addProject = async(req,res) =>{
+    try{
+        const title = req.body.title;
+        const department = new mongoose.Types.ObjectId(req.body.department);
+        const start = req.body.startDate;
+        const leader = new mongoose.Types.ObjectId(req.body.leader);
+        const description = req.body.description;
+        let contributors = []
+
+        req.body.contributors.forEach((contributor)=>{
+            contributors.push(new mongoose.Types.ObjectId(contributor))
+        });
+
+        const project = new Project({
+            title,
+            department,
+            start_date:start,
+            leader,
+            description,
+            contributors,
+            status:"ongoing",
+        })
+        project.save();
+        res.status(200).json({success:true,message:"Project created successful"})
+    }catch(error){
+        res.status(500).json({success:false,error:"Faild to create project"})
+    }
+}
+
+const fetchProjects = async(req,res) =>{
+    try{
+        const projects = await Project.find().populate("department");
+        res.status(200).json({success:true,message:"Projects fetch success",projects})
+    }catch(error){
+        res.status(500).json({success:false,error:"error of fetching projects"})
+    }
+}
+
+const completeProject = async(req,res) =>{
+    try{
+        const id = new mongoose.Types.ObjectId(req.body.id)
+        const updateProject = await Project.findByIdAndUpdate(id,{status:"completed"})
+        res.status(200).json({success:true,message:"Project completed successfully."})
+    }catch(error){
+        res.status(500).json({success:false,error:"Project completed error"})
+    }
+}
+
+
+export {employeeAdd,upload,getEmployees,getEmployeeDetail,deleteEmploye,getAdmins,getEmployeeId,getprojectemployee,addProject,fetchProjects,completeProject}

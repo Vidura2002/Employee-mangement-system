@@ -122,6 +122,32 @@ const deleteEmployee = async(id,navigate) => {
 
 }
 
+const fetchProjects = async() =>{
+
+    let projects;
+
+    try{
+        console.log("yannai yanne")
+        const response = await axios.get("http://localhost:3000/api/employee/getprojects",
+            {
+                headers:{
+                    "Authorization":`Bearer ${localStorage.getItem("token")}`
+                }
+            }
+        )
+        if(response.data.success){
+            console.log("hari")
+            projects = response.data.projects
+        }
+    }catch(error){
+        if(error && !error.response.data.error){
+            alert(error.response.data.error)
+        }
+    }
+
+    return projects;
+}
+
  export const EmployeeButtons = ({ _id }) =>{
     const navigate = useNavigate()
     return(
@@ -141,4 +167,5 @@ const deleteEmployee = async(id,navigate) => {
     )
 }
 
-export {fetchDept,fetchAdmins,fetchEmployee}
+
+export {fetchDept,fetchAdmins,fetchEmployee,fetchProjects}

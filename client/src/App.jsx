@@ -15,6 +15,7 @@ import LeaveRequest from "./components/LeaveRequest";
 import Profile from "./components/Profile";
 import LeaveHistory from "./components/LeaveHistory";
 import CreateProject from "./components/CreateProject";
+import Project from "./components/Projects";
 
 function App() {
 
@@ -33,7 +34,8 @@ function App() {
             <Route path="/admin-dashboard/employee/:id" element={<ViewEmployee/>}></Route>
             <Route path="/admin-dashboard/employee-edit/:id" element={<EmployeeEdit/>}></Route>
             <Route path="/admin-dashboard/leaves" element={<LeaveList/>}></Route>
-            <Route path="/admin-dashboard/project" element={<CreateProject/>}></Route>
+            <Route path="/admin-dashboard/project" element={<Project/>}></Route>
+            <Route path="/admin-dashboard/createproject" element={<CreateProject/>}></Route>
           </Route>
           <Route path="/employee-dashboard" element={<EmplooyeDashboard/>}>
             <Route index element={<Profile/>}></Route>
