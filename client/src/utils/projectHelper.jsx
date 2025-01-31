@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { Dialog } from "@headlessui/react";
+import { Button } from '@mui/material'
+import { FaSearch } from "react-icons/fa";
 
 export const projectColumns=[
     {
@@ -68,7 +70,7 @@ const completeProject = async (id, navigate) => {
         )
         if(response.data.success){
           setTitle(response.data.project.title)
-          setDate(response.data.project.start_date)
+          setDate(new Date(response.data.project.start_date).toDateString())
           setDescription(response.data.project.description)
           setStatus(response.data.project.status)
           setDepartment(response.data.project.department.dept_name)
@@ -84,12 +86,16 @@ const completeProject = async (id, navigate) => {
     }
     return (
       <>
-        <button
-          className="bg-blue-600 font-bold px-2 py-1.5 rounded-md font-bold  hover:bg-blue-700"
+        <Button
+          //className="bg-blue-600 font-bold px-2 py-1.5 rounded-md font-bold  hover:bg-blue-700"
+          variant="contained"
+          startIcon={<FaSearch/>}
+          size="small"
+          color="secondary"
           onClick={openModel}
         >
           Explore
-        </button>
+        </Button>
 
 
   <Dialog open={isOpen} onClose={() => setOpen(false)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -103,7 +109,7 @@ const completeProject = async (id, navigate) => {
     <p><strong>Contributors:</strong></p>
     <div className="flex flex-row gap-4 mt-2">
       {contributors.map((item,index)=>(
-      <p key={index} className="bg-gray-700 text-white px-2 rounded py-1 text-sm">{item}</p>
+      <p key={index} className="bg-gray-700 text-white px-2 rounded py-1 text-sm shadow-md">{item}</p>
       ))}
     </div>
 
