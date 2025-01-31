@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Employee from "../models/Employee.js";
 import Leave from "../models/Leaves.js";
 import User from "../models/User.js";
+import Project from "../models/Project.js";
 
 
 const request_leave = async(req,res) =>{
@@ -92,6 +93,26 @@ const updateProfile = async(req,res) =>{
     }
 }
 
+const getProject = async(req,res) =>{
+    try{
+        const id = new mongoose.Types.ObjectId(req.params);
+        console.log(id)
+        const project = await Project.findOne({_id:id}).populate("department")
+        const leader = await Employee.findOne({_id:project.leader}).populate("userId",{password:0})
+        const contributors = project.contributors;
 
+        const contributors_name = await Promise.all(
+            contributors.map(async (contributor) => {
+                const user = await Employee.findOne({ _id: contributor }).populate("userId", { password: 0 });
+                return user?.userId?.name || "Unknown"; // Handle missing userId
+            })
+        );
+        console.log(contributors_name)
+        console.log(project);
+        res.status(200).json({success:true,message:"success",project,leader,contributors_name})
+    }catch(error){
+        res.status(500).json({success:false,error:"Faild"})
+    }
+}
 
-export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile}
+export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile,getProject}

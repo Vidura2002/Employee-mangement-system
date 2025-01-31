@@ -23,6 +23,7 @@ const Summary = () => {
   const [reject,setReject] = useState(0)
   const [pending,setPending] = useState(0)
   const [loading,setLoading] = useState(false)
+  const [salary,setSalary] = useState("")
 
   const data = [
     ["Task", "Hours per Day"],
@@ -95,6 +96,7 @@ const Summary = () => {
           setApprove(response.data.approve)
           setPending(response.data.pending)
           setReject(response.data.reject)
+          setSalary(response.data.totalSalary)
         }
       }catch(error){
         console.error("Error :",error)
@@ -113,7 +115,7 @@ const Summary = () => {
           <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mt-6'>
             <SummaryCard icon={<FaUsers/>} text={"Employees"} count={em_count} color={'bg-gray-800'}/>
             <SummaryCard icon={<FaBuilding/>} text={"Departments"} count={dept_count} color={"bg-gray-800"}/>
-            <SummaryCard icon={<FaMoneyBillWave/>} text={"Total Salary"} count={"$780"} color={"bg-gray-800"}/>
+            <SummaryCard icon={<FaMoneyBillWave/>} text={"Total Salary"} count={salary} color={"bg-gray-800"}/>
           </div>
           
           <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-5'>

@@ -31,15 +31,13 @@ const Projects = () => {
       const getProjects = await fetchProjects()
      setProjects(getProjects)
      if(getProjects){
-      let sno=1
         const data = getProjects.map((project)=>(
           {
-            sno:sno++,
             title:project.title,
             department:project.department.dept_name,
             start_date: new Date(project.start_date).toDateString(),
             status: project.status,
-            action:project.status === "ongoing" ? <ProjectButtons id={project._id}/> : null
+            action:(<ProjectButtons id={project._id}/>)
           }
         ))
       setData(data)
@@ -166,7 +164,7 @@ const Projects = () => {
                 </Box>
               </div>
             </div>
-            <div className='mt-3 flex item-center justify-center'>
+            <div className='mt-3 flex item-center '>
               <Button variant="outlined" size='small' onClick={onChange} startIcon={<FaFilter/> }>Filter</Button>
             </div>
             

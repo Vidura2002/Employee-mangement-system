@@ -22,7 +22,7 @@ const counter = async (req, res) => {
         const civil_dept = await Department.findOne({ dept_name: "Civil" });
         const health_dept = await Department.findOne({ dept_name: "Health" });
 
-        console.log(civil_dept);
+        
 
         // Initialize counts to 0
         let it_count = 0,
@@ -42,7 +42,17 @@ const counter = async (req, res) => {
         if (civil_dept) civil_count = await Employee.countDocuments({ department: civil_dept._id });
         if (health_dept) health_count = await Employee.countDocuments({ department: health_dept._id });
 
-        console.log(civil_count);
+        const salary = await Employee.aggregate([
+            {
+                $group:{
+                    _id:null,
+                    total_salary:{$sum:"$salary"}
+                }
+            }
+        ]);
+
+        const totalSalary = salary.length > 0 ? salary[0].total_salary : 0
+
 
         res.status(200).json({
             success: true,
@@ -58,7 +68,8 @@ const counter = async (req, res) => {
             health_count,
             male,
             female,
-            apply,approve,pending,reject
+            apply,approve,pending,reject,
+            totalSalary
         });
     } catch (error) {
         res.status(500).json({ success: false, error: "Failed to fetch data count." });
