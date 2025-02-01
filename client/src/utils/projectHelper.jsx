@@ -101,12 +101,12 @@ const completeProject = async (id, navigate) => {
   <Dialog open={isOpen} onClose={() => setOpen(false)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
   <div className="bg-white p-6 rounded-lg shadow-lg">
     <h2 className="text-xl font-bold mb-2">{title}</h2>
-    <p><strong>Department:</strong> {department}</p>
-    <p><strong>Start Date:</strong> {startDate}</p>
-    <p><strong>Project Leader:</strong> {leader}</p>
-    <p><strong>Description:</strong> {description}</p>
-    <p><strong>Status:</strong> {status}</p>
-    <p><strong>Contributors:</strong></p>
+    <p className="bg-gray-200 px-4 py-1 rounded"><strong>Department:</strong> {department}</p>
+    <p className="bg-gray-200 px-4 py-1 rounded"><strong>Start Date:</strong> {startDate}</p>
+    <p className="bg-gray-200 px-4 py-1 rounded"><strong>Project Leader:</strong> {leader}</p>
+    <p className="bg-gray-200 px-4 py-1 rounded"><strong>Description:</strong> {description}</p>
+    <p className="bg-gray-200 px-4 py-1 rounded"><strong>Status:</strong> {status}</p>
+    <p className="bg-gray-200 px-4 py-1 rounded"><strong>Contributors:</strong></p>
     <div className="flex flex-row gap-4 mt-2">
       {contributors.map((item,index)=>(
       <p key={index} className="bg-gray-700 text-white px-2 rounded py-1 text-sm shadow-md">{item}</p>
