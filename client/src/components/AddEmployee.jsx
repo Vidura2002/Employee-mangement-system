@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchDept } from '../utils/employeeHelper'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import { Errormessage, Successmessage } from '../utils/message'
 
 const AddEmployee = () => {
     const [departments,setDepartments]=useState([])
@@ -17,6 +18,9 @@ const AddEmployee = () => {
     const [password,setPassword]=useState("")
     const [role,setRole]=useState("")
     const [image,setImage]=useState("")
+
+    const [success,setSuccess] = useState("")
+    const [error,setError] = useState("")
 
     const navigate = useNavigate()
 
@@ -40,12 +44,16 @@ const AddEmployee = () => {
                 }
             )
             if(response.data.success){
-                navigate("/admin-dashboard/employee")
+                setSuccess(response.data.message)
+                setTimeout(()=>{
+                    navigate("/admin-dashboard/employee")
+                },5000)
+               
             }
         }catch(error){
             console.log(error)
             if(error && !error.response.data.error){
-                alert(error.response.data.error)
+                setError(error.response.data.error)
             }
         }
     }
@@ -202,6 +210,9 @@ const AddEmployee = () => {
         className='w-full bg-purple-600 text-white mt-6 hover:bg-purple-700 font-bold px-4 py-2 rounded-md'
         >Add Employee</button>
       </form>
+
+      {success && <Successmessage message={success}/>}
+      {error && <Errormessage message={error}/>}
     </div>
   )
 }

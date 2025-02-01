@@ -3,6 +3,7 @@ import Employee from "../models/Employee.js";
 import Leave from "../models/Leaves.js";
 import User from "../models/User.js";
 import Project from "../models/Project.js";
+import Notifications from "../models/Notifications.js";
 
 
 const request_leave = async(req,res) =>{
@@ -11,7 +12,10 @@ const request_leave = async(req,res) =>{
         const date = req.body.date;
         const to = req.body.receiver;
         const from = req.body.from;
-        const type = req.body.type
+        const type = req.body.type;
+
+        const leave_user = await User.findById(from);
+        const message =`${leave_user.name} requested a ${type} leave request.Please make a decision!`;
         
         const newLeave = new Leave({
             user_id:from,
@@ -22,6 +26,14 @@ const request_leave = async(req,res) =>{
             leave_date:date,
         });
         await newLeave.save();
+
+        const notification = new Notifications({
+            user:to,
+            message,
+            seen:false
+        });
+        await notification.save();
+
         res.status(200).json({success:true,message:"Leave request successed."})
     }catch(error){
         res.status(500).json({success:false,error:"Leave request faild!"})
@@ -115,4 +127,41 @@ const getProject = async(req,res) =>{
     }
 }
 
-export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile,getProject}
+const fetchNotifications = async(req,res) =>{
+    try{
+        const owner = new mongoose.Types.ObjectId(req.params);
+        const notifications = await Notifications.find({user:owner}).sort({date:-1});
+        console.log(notifications)
+        res.status(200).json({success:true,message:"notifications fetch success.",notifications})
+    }catch(error){
+        res.status(500).json({success:false,error:"notifications fetch failed!"})
+    }
+}
+
+const clickNotification = async(req,res) =>{
+    try{
+        const id = req.body.id;
+        const update = await Notifications.findByIdAndUpdate(id,{seen:true});
+        if(update){
+            res.status(200).json({success:true,message:"success"})
+        }
+    }catch(error){
+        res.status(500).json({success:false,error:"notification update error!"})
+    }
+}
+
+const notificationCount = async(req,res) =>{
+    try{
+        console.log("pip pip")
+        const {id} = req.params;
+        const count = await Notifications.countDocuments({user:id,seen:false});
+        console.log(count)
+        if(count){
+            res.status(200).json({success:true,count})
+        }
+    }catch(error){
+        res.status(500).json({success:false,error:"Error"})
+    }
+}
+
+export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile,getProject,fetchNotifications,clickNotification,notificationCount}

@@ -46,7 +46,7 @@ const Summary = () => {
     backgroundColor:"#1F2937",
     is3D:false,
     pieHole: 0.5,
-    colors: ["#00ffff", "#9900ff", "#0004ff", "#7b3dff", "#d400ff"],
+    colors: ["#7021a3", "#9900ff", "#0004ff", "#7b3dff", "#d400ff"],
     legend: {
       position: "right",
       alignment: "center",
@@ -60,7 +60,7 @@ const Summary = () => {
   const options2 = {
     backgroundColor:"#1F2937",
     is3D:true,
-    colors: ["#00ffff", "#9900ff", "#0004ff", "#7b3dff", "#d400ff"],
+    colors: ["#7021a3", "#9900ff", "#0004ff", "#7b3dff", "#d400ff"],
     legend: {
       position: "right",
       alignment: "center",
