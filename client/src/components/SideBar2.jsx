@@ -29,7 +29,7 @@ const SideBar2 = () => {
             <span>Message</span>
         </NavLink>
 
-        <NavLink to="/" className="flex items-center space-x-4 block py-2.5 px-4 rounded">
+        <NavLink to="/employee-dashboard/setting" className={({isActive}) => `${isActive ? "bg-purple-500" : " "} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
             <FaCogs/>
             <span>Settings</span>
         </NavLink>

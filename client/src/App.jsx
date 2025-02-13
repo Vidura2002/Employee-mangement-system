@@ -17,6 +17,7 @@ import LeaveHistory from "./components/LeaveHistory";
 import CreateProject from "./components/CreateProject";
 import Project from "./components/Projects";
 import Notifications from "./components/Notifications";
+import Setting from "./components/Setting";
 
 function App() {
 
@@ -43,6 +44,8 @@ function App() {
             <Route index element={<Profile/>}></Route>
             <Route path="/employee-dashboard/leaverequest" element={<LeaveRequest/>}></Route>
             <Route path="/employee-dashboard/leavehistory" element={<LeaveHistory/>}></Route>
+            <Route path="/employee-dashboard/notifications" element={<Notifications/>}></Route>
+            <Route path="/employee-dashboard/setting" element={<Setting/>}></Route>
           </Route>
       </Routes>
     </BrowserRouter>

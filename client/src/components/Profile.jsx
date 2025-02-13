@@ -25,6 +25,7 @@ const Profile = () => {
     const [gender,setGender] = useState("")
     const [birthday,setBirthday] = useState("")
     const [image,setImage]=useState("")
+    const [leaveCount,setLeaveCount] = useState("")
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
@@ -69,6 +70,7 @@ const Profile = () => {
                     setSalary(response.data.employee.salary)
                     setGender(response.data.employee.gender)
                     setBirthday(new Date(response.data.employee.date_of_birth).toDateString())
+                    setLeaveCount(response.data.leaveCount)
                 }
             }catch(error){
                 if(error && !error.response.data.error){
@@ -125,7 +127,7 @@ const Profile = () => {
         <div className='flex flex-row'>
           <div className='bg-gray-700 w-64 ml-16 mt-2 rounded-md shadow-md shadow-gray-300 py-4 flex flex-col items-center justify-center text-gray-300 font-bold'>
             <p className='text-xl'>Total Leaves</p>
-            <p className='text-2xl'>8</p>
+            <p className='text-2xl'>{leaveCount}</p>
           </div>
           <div className='bg-gray-700  mt-2 rounded-md shadow-md shadow-gray-300 w-64 py-4 ml-16 flex flex-col items-center justify-center text-gray-300 font-bold'>
               <p className='text-xl'>Total Projects</p>

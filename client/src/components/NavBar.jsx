@@ -53,6 +53,14 @@ const NavBar = () => {
         }
         fetchCount();
     },[])
+
+    const navigateToNotifications = () =>{
+      if(user.role === "admin"){
+        navigate("/admin-dashboard/notifications")
+      }else{
+        navigate("/employee-dashboard/notifications")
+      }
+    }
     
   return (
     <>
@@ -60,7 +68,7 @@ const NavBar = () => {
       <p className='py-2 px-4 font-bold'>Welcome {user.name}</p>
 
       <div className='flex flex-row gap-8 font-bold'>
-        <IconButton onClick={()=>navigate("/admin-dashboard/notifications")}>
+        <IconButton onClick={()=>navigateToNotifications()}>
           <NotificationsIcon fontSize="small" />
           <CartBadge badgeContent={count} color="secondary" overlap="circular" />
         </IconButton>

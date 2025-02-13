@@ -6,6 +6,7 @@ import { senEmail } from "../utils/emailServer.js"
 import mongoose from "mongoose";
 import Department from "../models/Department.js"
 import Project from "../models/Project.js"
+import Leave from "../models/Leaves.js"
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
@@ -89,7 +90,8 @@ const getEmployeeDetail = async(req,res) =>{
         const id = new mongoose.Types.ObjectId(req.params)
         console.log(id)
         const employee = await Employee.findById(id).populate('userId',{password:0}).populate('department')
-        res.status(200).json({success:true,message:"Fetch employee success",employee})
+        const leaveCount = await Leave.countDocuments({user_id:employee.userId})
+        res.status(200).json({success:true,message:"Fetch employee success",employee,leaveCount})
         console.log(employee)
     }catch(error){
         res.status(500).json({success:false,error:"Fetch data failed"})

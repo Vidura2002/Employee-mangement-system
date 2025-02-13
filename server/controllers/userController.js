@@ -4,6 +4,7 @@ import Leave from "../models/Leaves.js";
 import User from "../models/User.js";
 import Project from "../models/Project.js";
 import Notifications from "../models/Notifications.js";
+import bcrypt from 'bcrypt'
 
 
 const request_leave = async(req,res) =>{
@@ -164,4 +165,26 @@ const notificationCount = async(req,res) =>{
     }
 }
 
-export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile,getProject,fetchNotifications,clickNotification,notificationCount}
+const changePassword = async(req,res) =>{
+    try{
+        const password = req.body.currentpassword;
+        const newPassword = req.body.newpassword;
+        const user_id= req.body.id
+        const user = await User.findOne({_id:user_id})
+    
+        const compare = await bcrypt.compare(password,user.password);
+        console.log(compare)
+        if(!compare){
+            return res.status(200).json({success:false,error:"Existing password is incorrect!"})
+        }
+        
+        const hashPassword = await bcrypt.hash(newPassword,12)
+        const changepassword = await User.findByIdAndUpdate(user_id,{password:hashPassword})
+        res.status(200).json({success:true,message:"Password has been updated successfully"})
+        
+    }catch(error){
+        res.status(500).json({success:false,error:"Error updating the password!"})
+    }
+}
+
+export {request_leave,getLeaves,myLeaves,cancelLeaves,updateProfile,getProject,fetchNotifications,clickNotification,notificationCount,changePassword}

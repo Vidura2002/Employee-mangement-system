@@ -48,7 +48,12 @@ const Notifications = () => {
                 }
             )
             if(response.data.success){
-                navigate("/admin-dashboard/leaves")
+                if(user.role === "admin"){
+                    navigate("/admin-dashboard/leaves")
+                }else{
+                    navigate("/employee-dashboard/leavehistory")
+                }
+                
             }
         }catch(error){
             if(error && !error.response.data.error){
