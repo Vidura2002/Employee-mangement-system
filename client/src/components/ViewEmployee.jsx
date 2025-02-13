@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import EmployeeIDCard from './EmployeeIDCard';
 
 const ViewEmployee = () => {
 
@@ -56,8 +57,9 @@ const ViewEmployee = () => {
   return (
     <>{loading ? <div>Loading....</div> :
         <div className='h-full'>
-            <div className='w-full bg-gray-700 h-full  p-8  shadow-md'>
+            <div className='w-full bg-gray-700   p-8  shadow-md'>
                 <h3 className='text-2xl font-bold mb-5 text-center text-white'>Employee Information</h3>
+                <EmployeeIDCard employee={{id:id , name:name ,department:department ,designation:designation}} />
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
                         <label htmlFor='name' className='font-medium text-gray-400'>Name : </label>
@@ -109,6 +111,7 @@ const ViewEmployee = () => {
                         <input type='text' value={created}  className='px-3 py-2 shadow-md w-full bg-gray-800 text-gray-400 rounded-md'></input>
                     </div>
                 </div>
+                
             </div>
         </div>
     }</>

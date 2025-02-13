@@ -39,6 +39,7 @@ function App() {
             <Route path="/admin-dashboard/project" element={<Project/>}></Route>
             <Route path="/admin-dashboard/createproject" element={<CreateProject/>}></Route>
             <Route path="/admin-dashboard/notifications" element={<Notifications/>}></Route>
+            <Route path="/admin-dashboard/setting" element={<Setting/>}></Route>
           </Route>
           <Route path="/employee-dashboard" element={<EmplooyeDashboard/>}>
             <Route index element={<Profile/>}></Route>
