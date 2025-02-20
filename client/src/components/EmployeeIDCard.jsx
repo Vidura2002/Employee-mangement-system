@@ -17,13 +17,25 @@ const EmployeeIDCard = ({ employee }) => {
     };
 
     const downloadPDF = () => {
-        html2canvas(cardRef.current).then((canvas) => {
+        html2canvas(cardRef.current, {
+            useCORS: true,  // Allows fetching remote images
+            allowTaint: true,
+            scale: 2        // Increases resolution
+        }).then((canvas) => {
             const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, "PNG", 20, 20, 100, 60);
+            const pdf = new jsPDF("p", "mm", "a4");
+    
+            // Center the ID card on the PDF
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const imgWidth = 100;  // Width of the ID card in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width; // Keep aspect ratio
+            const xOffset = (pdfWidth - imgWidth) / 2; // Center horizontally
+    
+            pdf.addImage(imgData, "PNG", xOffset, 20, imgWidth, imgHeight);
             pdf.save(`${employee.name}_ID_Card.pdf`);
         });
     };
+    
 
     return (
         <div className="flex flex-row mt-5 mb-5 items-center gap-4">
