@@ -21,7 +21,8 @@ const upload = multer({storage:storage})
 
 const employeeAdd = async(req,res) =>{
     try{
-        const {name,email,id,dob,gender,marital,designation,department,salary,password,role,image}=req.body
+        console.log("going to add member")
+        const {name,email,id,dob,gender,marital,designation,department,salary,password,role,imageUrl}=req.body
 
         const user = await User.findOne({email})
         if(user){
@@ -34,6 +35,7 @@ const employeeAdd = async(req,res) =>{
             email,
             password:hashPassword,
             role,
+            profileImage:imageUrl
         })
         const savedUser = await newUser.save()
         const newEmployee = new Employee({

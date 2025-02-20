@@ -3,6 +3,7 @@ import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom'
 import { emColumns, EmployeeButtons } from '../utils/employeeHelper'
 import axios from 'axios'
+import profile from '../assets/images/icon.png'
 
 
 const EmployeeList = () => {
@@ -29,9 +30,10 @@ const EmployeeList = () => {
               _id:em._id,
               sno:sno++,
               name:em.userId.name,
+              image:(<img src={em.userId.profileImage===undefined ? profile : em.userId.profileImage} className='size-12 rounded-full mt-1'/>),
               employee_id:em.employee_id,
               department:em.department.dept_name,
-              Birthday :new Date(em.date_of_birth).toDateString(),
+              //Birthday :new Date(em.date_of_birth).toDateString(),
               action:(<EmployeeButtons _id={em._id}/>)
             }
           ))

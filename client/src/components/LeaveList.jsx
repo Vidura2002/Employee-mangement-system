@@ -33,6 +33,7 @@ const LeaveList = () => {
                 }
             )
             if(response.data.success){
+              console.log(response.data.leaves)
                 let sno = 1;
                 const data = response.data.leaves.map((leav)=>(
                   {
@@ -48,9 +49,7 @@ const LeaveList = () => {
                 setFilterLeaves(data)
             }
           }catch(error){
-            if(error && !error.response.data.error){
-              console.error("Error :",error.response.data.error)
-            }
+            alert(error?.response?.data.error);
           }
         }
         gettingLeaves();

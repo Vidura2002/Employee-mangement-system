@@ -4,6 +4,8 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { Button } from "@mui/material";
 import { FaDownload } from "react-icons/fa";
+import profile from "../assets/images/icon.png"
+
 
 const EmployeeIDCard = ({ employee }) => {
     const cardRef = useRef(null);
@@ -27,10 +29,18 @@ const EmployeeIDCard = ({ employee }) => {
         <div className="flex flex-row mt-5 mb-5 items-center gap-4">
             <div ref={cardRef} className="bg-white text-black w-96 shadow-md">
                 <p className="bg-gray-800 px-4 text-center text-gray-300 font-bold py-2">Employee ID card</p>
-                <h3 className="font-medium px-4 text-sm">{employee.name}</h3>
-                <p className="font-medium px-4 text-sm">ID: {employee.id}</p>
-                <p className="font-medium px-4 text-sm">Department: {employee.department}</p>
-                <p className="font-medium mb-2 px-4 text-sm">Position: {employee.designation}</p>
+                <div className="flex flex-row items-center mt-4 px-2 gap-4">
+                    <div>
+                        <img src={employee.image===undefined ? profile : employee.image} className="size-20 rounded-full"/>
+                    </div>
+                    <div>
+                        <h3 className="font-medium px-4 text-sm">{employee.name}</h3>
+                        <p className="font-medium px-4 text-sm">ID: {employee.id}</p>
+                        <p className="font-medium px-4 text-sm">Department: {employee.department}</p>
+                        <p className="font-medium mb-2 px-4 text-sm">Position: {employee.designation}</p>
+                    </div>
+                </div>
+                
                 <img src={generateBarcode(employee.id)} alt="Barcode" />
             </div>
             <div>

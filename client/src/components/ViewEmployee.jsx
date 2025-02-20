@@ -18,6 +18,7 @@ const ViewEmployee = () => {
     const [department,setDepartment] = useState("")
     const [created,setCreated]=useState("")
     const [loading,setLoading] = useState(false)
+    const [image,setImage] = useState(null)
 
     useEffect(()=>{
 
@@ -42,6 +43,7 @@ const ViewEmployee = () => {
                     setDesignation(response.data.employee.designation)
                     setCreated(response.data.employee.createdAt)
                     setDepartment(response.data.employee.department.dept_name)
+                    setImage(response.data.employee.userId.profileImage)
                 }
             }catch(error){
                 if(error && !error.response.data.error){
@@ -59,7 +61,7 @@ const ViewEmployee = () => {
         <div className='h-full'>
             <div className='w-full bg-gray-700   p-8  shadow-md'>
                 <h3 className='text-2xl font-bold mb-5 text-center text-white'>Employee Information</h3>
-                <EmployeeIDCard employee={{id:id , name:name ,department:department ,designation:designation}} />
+                <EmployeeIDCard employee={{id:id , name:name ,department:department ,designation:designation,image:image}} />
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
                         <label htmlFor='name' className='font-medium text-gray-400'>Name : </label>

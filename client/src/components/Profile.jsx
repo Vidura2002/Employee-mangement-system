@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { fetchDept } from '../utils/employeeHelper'
 import { useAuth } from '../context/authContext'
 import { Errormessage, Successmessage } from '../utils/message'
-import logo from '../assets/images/profile.jpg'
+import logo from '../assets/images/icon.png'
 
 const Profile = () => {
 
@@ -24,7 +24,7 @@ const Profile = () => {
     const [salary,setSalary]=useState("")
     const [gender,setGender] = useState("")
     const [birthday,setBirthday] = useState("")
-    const [image,setImage]=useState("")
+    const [image,setImage]=useState(null)
     const [leaveCount,setLeaveCount] = useState("")
 
     const handleSubmit = async(e) =>{
@@ -65,6 +65,7 @@ const Profile = () => {
                     setName(response.data.employee.userId.name)
                     setEmail(response.data.employee.userId.email)
                     setMarital(response.data.employee.marital_status)
+                    setImage(response.data.employee.userId.profileImage)
                     setDesignation(response.data.employee.designation)
                     setDepartment(response.data.employee.department.dept_name)
                     setSalary(response.data.employee.salary)
@@ -116,7 +117,7 @@ const Profile = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-2 mb-5'>
         <div className='flex flex-row items-center gap-8 text-gray-300 font-bold shadow-lg px-4 py-1 italic rounded-md'>
-          <img src={logo} alt='profile'className='size-48 rounded-full shadow-md'/>
+          <img src={image instanceof File ? URL.createObjectURL(image) : image ? image : logo} alt='profile'className='size-48 rounded-full shadow-md'/>
           <div>
             <p>Department : {department}</p>
             <p>Gender : {gender}</p>

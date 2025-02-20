@@ -3,6 +3,7 @@ import { fetchDept } from '../utils/employeeHelper'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import { Errormessage, Successmessage } from '../utils/message'
+import { ID, storage } from '../utils/appwrite'
 
 const AddEmployee = () => {
     const [departments,setDepartments]=useState([])
@@ -17,7 +18,7 @@ const AddEmployee = () => {
     const [salary,setSalary]=useState("")
     const [password,setPassword]=useState("")
     const [role,setRole]=useState("")
-    const [image,setImage]=useState("")
+    const [image,setImage]=useState(null)
 
     const [success,setSuccess] = useState("")
     const [error,setError] = useState("")
@@ -35,8 +36,22 @@ const AddEmployee = () => {
     const handleSubmit = async(e) =>{
         e.preventDefault()
         try{
+
+            if(!image){
+                setError("Please upload a image")
+                return;
+            }
+            const createImage = await storage.createFile(
+                "67b75754003d9a14f1a8",
+                ID.unique(),
+                image
+            );
+
+            const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/67b75754003d9a14f1a8/files/${createImage.$id}/view?project=67b75725001e624bd1d0`;
+            console.log(imageUrl)
+
             const response = await axios.post("http://localhost:3000/api/employee/add",
-                {name,email,id,dob,gender,marital,designation,department,salary,password,role,image},
+                {name,email,id,dob,gender,marital,designation,department,salary,password,role,imageUrl},
                 {
                     headers:{
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -51,10 +66,7 @@ const AddEmployee = () => {
                
             }
         }catch(error){
-            console.log(error)
-            if(error && !error.response.data.error){
-                setError(error.response.data.error)
-            }
+           setError(error?.response?.data?.error);
         }
     }
 
@@ -197,9 +209,9 @@ const AddEmployee = () => {
                 <label className='block text-sm font-medium text-gray-400' htmlFor="image">Upload Image</label>
                 <input type='file'
                 name="image"
-                onChange={(event)=>setImage(event.target.value)}
+                onChange={(event)=>setImage(event.target.files[0])}
                 placeholder='upload image'
-                accept='/image/*'
+                accept='image/*'
                 className='mt-1 p-2 block w-full border bg-gray-800 text-white rounded-md'
                 ></input>
             </div>

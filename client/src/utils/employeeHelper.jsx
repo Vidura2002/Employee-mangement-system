@@ -71,6 +71,11 @@ export const emColumns =[
         width:"70px"
     },
     {
+        name:"Image",
+        selector:(row) => row.image,
+
+    },
+    {
         name:"Employee ID",
         selector:(row) => row.employee_id,
         width:"120px"
@@ -78,12 +83,6 @@ export const emColumns =[
     {
         name:"Name",
         selector:(row) => row.name,
-        sortable:true
-    },
-    {
-        name:"Birthday",
-        selector:(row)=> row.Birthday,
-        width:"130px",
         sortable:true
     },
     {
