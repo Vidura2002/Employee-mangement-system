@@ -66,7 +66,7 @@ const AddDepartment = () => {
         </form>
 
         {/* {success && <Successmessage message={success}/>}  */}
-        {error && <Errormessage message={error}/>}
+        {/* {error && <Errormessage message={error}/>} */}
     </div>
   )
 }
