@@ -65,7 +65,7 @@ const AddDepartment = () => {
           <button type='submit' className='w-full mt-6 bg-purple-600 font-bold hover:bg-purple-700 text-white py-2 px-4 rounded-md'>Add department</button>
         </form>
 
-        {success && <Successmessage message={success}/>}
+        {/* {success && <Successmessage message={success}/>}  */}
         {error && <Errormessage message={error}/>}
     </div>
   )
